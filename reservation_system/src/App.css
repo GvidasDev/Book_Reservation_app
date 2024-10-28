@@ -1,0 +1,192 @@
+body {
+    background-color: rgb(226, 241, 231);
+    padding: 1rem;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0; 
+}
+
+hr {
+    border: 1px solid rgb(56, 116, 120);
+    width: 100%;
+}
+
+img {
+    border: 1px solid rgb(56, 116, 120);
+    border-radius: 0.25em;
+    width: 50px;
+    height: 50px;
+}
+
+.txt{
+    color: rgb(56, 116, 120);
+    text-decoration: none;
+}
+
+.txt-link{
+    font-size: 1.1rem;
+}
+
+.txt-link:hover{
+    transform: scale(1.1);
+}
+
+.btn {
+    background: rgb(98, 149, 132);
+    border: 1px solid rgb(56, 116, 120);
+    color: rgb(226, 241, 231);
+    padding: 0.25em 0.5em;
+    border-radius: 0.25em;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn:hover{
+    background: rgb(90, 136, 121);
+    color: rgb(218, 231, 222);
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.filters-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.items-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.checkbox-input{
+    appearance: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgb(56, 116, 120);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkbox-input:checked {
+    background-color: rgb(226, 241, 231);
+}
+
+.checkbox-input:checked::after {
+    content: '✓';
+    font-size: 10px;
+    color: rgb(56, 116, 120);
+    font-weight: bold;
+}
+
+.checkbox-input:disabled {
+    background-color: rgb(200, 200, 200);
+    border-color: rgb(150, 150, 150);
+    cursor: not-allowed;
+}
+
+.checkbox-input:checked:disabled::after {
+    color: rgb(150, 150, 150);
+}
+
+.input-options{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: left;
+    width: 100%;
+}
+
+.date-input{
+    background: rgb(226, 241, 231);
+    border: 1px solid rgb(56, 116, 120);
+    color: rgb(56, 116, 120);
+}
+
+.books-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.reservation-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    background-color: #CCD9D0;
+    border: 2px solid rgb(56, 116, 120);
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.filter{
+    background: rgb(238, 240, 239);
+    border: 1px solid rgb(56, 116, 120);
+    color: rgb(98, 149, 132);
+    padding: 0.25em 0.5em;
+    border-radius: 0.25em;
+    cursor: pointer;
+    outline: none;
+}
+
+.filter-input::placeholder{
+    color: rgb(98, 149, 132);
+}
+
+.book-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #CCD9D0;
+    border: 2px solid rgb(56, 116, 120);
+    padding: 1rem;
+    border-radius: 8px;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.res-info{
+    display: flex;
+    gap: 20px;
+}
