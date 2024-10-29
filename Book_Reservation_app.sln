@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Book_Reservation_app", "Book_Reservation_app\Book_Reservation_app.csproj", "{53FA9210-38AA-4790-A549-30C11A3A78E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book_Reservation_app", "Book_Reservation_app\Book_Reservation_app.csproj", "{53FA9210-38AA-4790-A549-30C11A3A78E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookReservationApp.Tests", "BookReservationApp.Tests\BookReservationApp.Tests.csproj", "{3142B500-9C88-43F1-BA0A-2EA942CB382E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{53FA9210-38AA-4790-A549-30C11A3A78E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53FA9210-38AA-4790-A549-30C11A3A78E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53FA9210-38AA-4790-A549-30C11A3A78E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3142B500-9C88-43F1-BA0A-2EA942CB382E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3142B500-9C88-43F1-BA0A-2EA942CB382E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3142B500-9C88-43F1-BA0A-2EA942CB382E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3142B500-9C88-43F1-BA0A-2EA942CB382E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

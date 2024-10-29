@@ -1,7 +1,7 @@
 ﻿using Book_Reservation_app.Models;
 
 namespace Book_Reservation_app {
-    public static class FeesCalculations {
+    public class FeesCalculations {
         public static void FeesSum(ReservationC reservationc, ref int days, ref decimal totalPrice) {
             days = CalculatedDays(reservationc);
             decimal price = SetReservationFee(reservationc, days);
@@ -21,9 +21,9 @@ namespace Book_Reservation_app {
         static decimal Discount(decimal price, int days) {
             if (days > 3) {
                 if (days > 10) {
-                    price *= 0.8m;
+                    return price *= 0.8m;
                 }
-                price *= 0.9m;
+                return price *= 0.9m;
             }
             return price;
         }
