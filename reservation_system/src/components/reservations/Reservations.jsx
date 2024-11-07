@@ -24,15 +24,7 @@ export default function Reservations() {
             <h1 className="txt title">Reservations</h1>
             <div>
                 {reservations.map(reservation => {
-                    return <Reservation 
-                     key={reservation.id}
-                     id={reservation.id}
-                     title={reservation.title}
-                     days={reservation.days}
-                     isPickUp={reservation.isQuickPickUp ? 'Yes' : 'No'}
-                     totalPrice={reservation.totalPrice}
-                     reservationEnd={new Date(reservation.reservationEnd).toLocaleDateString()}
-                     bookType={reservation.isAudioBook ? 'Audiobook' : 'Book'}/>
+                    return <Reservation reservation={reservation}/>
                 })}
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export function Book({id, title, author, year, image}){
+export function Book({id, title, year, image}){
     const navigate = useNavigate();
 
     const handleReserveClick = () => {

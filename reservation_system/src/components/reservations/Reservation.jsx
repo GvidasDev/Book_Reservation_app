@@ -1,16 +1,16 @@
 import React from 'react';
 
-export function Reservation({id, title, days, isPickUp, totalPrice, reservationEnd, bookType}){
+export function Reservation({reservation}){
     return(
         <div className='reservation-container'>
-            <p className='txt res-text'> <strong> {id} Reservation :</strong></p>
+            <p className='txt res-text'> <strong> {reservation.id} Reservation :</strong></p>
             <div className='txt res-info'>
-                <p><strong>Book title: </strong>{title}</p>
-                <p><strong> Book type: </strong>{bookType}</p>
-                <p><strong> Is quick up: </strong>{isPickUp}</p>
-                <p><strong> Book reservation time: </strong>{days} {days === 1 ? 'day' : 'days'}</p>
-                <p><strong> Book return date: </strong>{reservationEnd}</p>
-                <p><strong> Total reservation cost: </strong>{totalPrice} €</p>
+                <p><strong>Book title: </strong>{reservation.title}</p>
+                <p><strong> Book type: </strong>{reservation.isAudioBook ? 'Audiobook' : 'Book'}</p>
+                <p><strong> Is quick up: </strong>{reservation.isQuickPickUp ? 'Yes' : 'No'}</p>
+                <p><strong> Book reservation time: </strong>{reservation.days} {reservation.days === 1 ? 'day' : 'days'}</p>
+                <p><strong> Book return date: </strong>{new Date(reservation.reservationEnd).toLocaleDateString()}</p>
+                <p><strong> Total reservation cost: </strong>{reservation.totalPrice} €</p>
             </div>
         </div>
     );
