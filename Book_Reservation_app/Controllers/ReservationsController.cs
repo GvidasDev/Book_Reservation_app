@@ -1,148 +1,71 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Book_Reservation_app.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using Book_Reservation_app.Models;
+using Book_Reservation_app.Services;
 
 namespace Book_Reservation_app.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReservationsController : ControllerBase
-    {
-        private readonly LibraryContext _context;
+    public class ReservationsController : ControllerBase {
+        private readonly ReservationService reservationService;
 
-        public ReservationsController(LibraryContext context)
-        {
-            _context = context;
+        public ReservationsController(ReservationService reservationService) {
+            this.reservationService = reservationService;
         }
 
         [HttpGet("full")]
-        public async Task<IActionResult> GetReservationswithBooks() {
-            var reservations = await (from reservation in _context.Reservations
-                                      join book in _context.Books on reservation.BookId equals book.Id
-                                      select new ReservationWithBook{
-                                          Id = reservation.Id,
-                                          BookId = reservation.BookId,
-                                          Days = reservation.Days,
-                                          IsQuickPickUp = reservation.IsQuickPickUp,
-                                          TotalPrice = reservation.TotalPrice,
-                                          ReservationEnd = reservation.ReservationEnd,
-                                          IsAudioBook = reservation.IsAudioBook,
-
-                                          Title = book.Title
-                                      })
-                                      .ToListAsync();
-
-            return new JsonResult(reservations);
+        public async Task<IActionResult> GetReservationsWithBooks() {
+            var reservations = await reservationService.GetReservationsWithBooksAsync();
+            return Ok(reservations);
         }
 
-
-        // GET: api/Reservations
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Reservation>>> GetReservations()
-        {
-            return await _context.Reservations.ToListAsync();
+        public async Task<ActionResult<IEnumerable<Reservation>>> GetReservations() {
+            var reservations = await reservationService.GetReservationsAsync();
+            return Ok(reservations);
         }
 
-        // GET: api/Reservations/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Reservation>> GetReservation(int id)
-        {
-            var reservation = await _context.Reservations.FindAsync(id);
-
-            if (reservation == null)
-            {
+        public async Task<ActionResult<Reservation>> GetReservation(int id) {
+            var reservation = await reservationService.GetReservationByIdAsync(id);
+            if (reservation == null) {
                 return NotFound();
             }
-
-            return reservation;
+            return Ok(reservation);
         }
 
-        // PUT: api/Reservations/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReservation(int id, Reservation reservation)
-        {
-            if (id != reservation.Id)
-            {
-                return BadRequest();
+        public async Task<IActionResult> PutReservation(int id, Reservation reservation) {
+            var success = await reservationService.UpdateReservationAsync(id, reservation);
+            if (!success) {
+                return NotFound();
             }
-
-            _context.Entry(reservation).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ReservationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
             return NoContent();
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<Reservation>> CreateReservation([FromBody] ReservationC reservationc) {
+        public async Task<ActionResult<Reservation>> CreateReservation([FromBody] ReservationCreateModel reservationc) {
             if (reservationc == null) {
-                return BadRequest("error");
+                return BadRequest("Invalid reservation data.");
             }
 
-            int days = 0;
-            decimal totalPrice = 0;
-            FeesCalculations.FeesSum(reservationc, ref days, ref totalPrice);
-
-            Reservation reservation = new Reservation(reservationc.BookId, days, reservationc.IsQuickPickUp, reservationc.IsAudioBook, totalPrice, reservationc.ReservationEnd);
-
-            _context.Reservations.Add(reservation);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetReservation", new { id = reservation.Id }, reservation);
+            var reservation = await reservationService.CreateReservationAsync(reservationc);
+            return CreatedAtAction(nameof(GetReservation), new { id = reservation.Id }, reservation);
         }
 
-        // POST: api/Reservations
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Reservation>> PostReservation(Reservation reservation)
-        {
-
-            _context.Reservations.Add(reservation);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetReservation", new { id = reservation.Id }, reservation);
+        public async Task<ActionResult<Reservation>> PostReservation(ReservationCreateModel reservation) {
+            var createdReservation = await reservationService.CreateReservationAsync(reservation);
+            return CreatedAtAction(nameof(GetReservation), new { id = createdReservation.Id }, createdReservation);
         }
 
-        // DELETE: api/Reservations/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReservation(int id)
-        {
-            var reservation = await _context.Reservations.FindAsync(id);
-            if (reservation == null)
-            {
+        public async Task<IActionResult> DeleteReservation(int id) {
+            var success = await reservationService.DeleteReservationAsync(id);
+            if (!success) {
                 return NotFound();
             }
-
-            _context.Reservations.Remove(reservation);
-            await _context.SaveChangesAsync();
-
             return NoContent();
-        }
-
-        private bool ReservationExists(int id)
-        {
-            return _context.Reservations.Any(e => e.Id == id);
         }
     }
 }

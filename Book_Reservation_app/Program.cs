@@ -1,4 +1,5 @@
 using Book_Reservation_app.Data;
+using Book_Reservation_app.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddDbContext<LibraryContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ReservationService>();
 
 var app = builder.Build();
 
@@ -26,12 +28,10 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Konfigûruojame marðrutà, kad naudojamas MVC modelis
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Pridëk ðá marðrutà, kad visos neþinomos uþklausos bûtø nukreiptos á index.html (React)
 app.MapFallbackToFile("index.html");
 
 app.Run();
