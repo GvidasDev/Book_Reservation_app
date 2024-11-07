@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import OptionsForm from './OptionsForm';
+import OptionsForm from '../forms/OptionsForm';
 
 export default function ReservationSystem() {
     const { id } = useParams();
